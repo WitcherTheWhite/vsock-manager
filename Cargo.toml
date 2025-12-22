@@ -1,0 +1,7 @@
+[package]
+name = "vsock-manager"
+version = "0.1.0"
+authors = ["huangsiyuan <huangsiyuan@kylinos.cn>"]
+edition = "2024"
+
+[dependencies]
