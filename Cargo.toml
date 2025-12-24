@@ -5,3 +5,6 @@ authors = ["huangsiyuan <huangsiyuan@kylinos.cn>"]
 edition = "2024"
 
 [dependencies]
+dashmap = "6.1.0"
+anyhow = "1.0.100"
+bincode = "2.0.1"
