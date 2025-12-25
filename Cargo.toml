@@ -8,3 +8,11 @@ edition = "2024"
 dashmap = "6.1.0"
 anyhow = "1.0.100"
 bincode = "2.0.1"
+vsock = "0.5"
+bytemuck = { version = "1.24.0", features = [ "derive" ] }
+
+mbedtls = { path = "./rust-mbedtls/mbedtls" }
+mbedtls-sys-auto = { path = "./rust-mbedtls/mbedtls-sys" }
+
+[features]
+default = [ "mbedtls/ssl" ]

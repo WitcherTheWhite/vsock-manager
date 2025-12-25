@@ -2,10 +2,14 @@ use std::{sync::Arc, thread};
 
 use dashmap::DashSet;
 
-use crate::ta_server::run_ta_server;
+use crate::{ta_server::run_ta_server, vsock_server::run_vsock_server};
 
+mod pks;
 mod protocal;
 mod ta_server;
+mod vsock_define;
+mod vsock_protocal;
+mod vsock_server;
 
 fn main() {
     let ta_registry = Arc::new(DashSet::<String>::new());
@@ -19,5 +23,15 @@ fn main() {
         }
     });
 
+    let handle2 = thread::spawn({
+        let registry = ta_registry.clone();
+        move || {
+            if let Err(e) = run_vsock_server(registry) {
+                eprintln!("Vsock server failed: {:?}", e);
+            }
+        }
+    });
+
     handle1.join().expect("TA server thread panicked");
+    handle2.join().expect("Vsock server thread panicked");
 }
