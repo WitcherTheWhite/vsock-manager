@@ -9,10 +9,10 @@ dashmap = "6.1.0"
 anyhow = "1.0.100"
 bincode = "2.0.1"
 vsock = "0.5"
-bytemuck = { version = "1.24.0", features = [ "derive" ] }
+bytemuck = { version = "1.24.0", features = ["derive"] }
 
-mbedtls = { path = "./rust-mbedtls/mbedtls" }
-mbedtls-sys-auto = { path = "./rust-mbedtls/mbedtls-sys" }
-
-[features]
-default = [ "mbedtls/ssl" ]
+mbedtls = { git = "https://gitee.com/openkylin/rust-mbedtls.git", rev = "70ed2dc", default-features = false, features = [
+    "std",
+    "ssl",
+] }
+mbedtls-sys-auto = { git = "https://gitee.com/openkylin/rust-mbedtls.git", rev = "70ed2dc", package = "mbedtls-sys-auto", default-features = false }
