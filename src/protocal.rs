@@ -10,10 +10,6 @@ pub enum TeeRequest {
     OpenSession {
         uuid: String,
         connection_method: u32,
-    },
-    OpenSessionWithParams {
-        uuid: String,
-        connection_method: u32,
         params: Parameters,
     },
     CloseSession {

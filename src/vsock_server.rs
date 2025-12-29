@@ -77,9 +77,7 @@ pub fn handle_vsock_request(
             break;
         }
 
-        if let Err(e) = ctx.read_exact(&mut header) {
-            break;
-        }
+        ctx.read_exact(&mut header)?;
 
         handle_packet(
             &mut ctx,
@@ -106,10 +104,6 @@ fn handle_packet(
     let (req, _): (TeeRequest, _) = decode_from_slice(&data, config::standard())?;
     let uuid = match req {
         TeeRequest::OpenSession { uuid, .. } => {
-            *session_uuid = Some(uuid.clone());
-            uuid
-        }
-        TeeRequest::OpenSessionWithParams { uuid, .. } => {
             *session_uuid = Some(uuid.clone());
             uuid
         }

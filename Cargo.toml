@@ -11,8 +11,8 @@ bincode = "2.0.1"
 vsock = "0.5"
 bytemuck = { version = "1.24.0", features = ["derive"] }
 
-mbedtls = { git = "https://gitee.com/openkylin/rust-mbedtls.git", rev = "70ed2dc", default-features = false, features = [
+mbedtls = { git = "https://gitee.com/openkylin/rust-mbedtls.git", branch = "smx-mbedtls-sys-auto_v2.28.12", default-features = false, features = [
     "std",
     "ssl",
 ] }
-mbedtls-sys-auto = { git = "https://gitee.com/openkylin/rust-mbedtls.git", rev = "70ed2dc", package = "mbedtls-sys-auto", default-features = false }
+mbedtls-sys-auto = { git = "https://gitee.com/openkylin/rust-mbedtls.git", branch = "smx-mbedtls-sys-auto_v2.28.12", package = "mbedtls-sys-auto", default-features = false }
