@@ -5,15 +5,15 @@ use mbedtls::{
 
 const KYLINOS: &str = "www.kylinos.cn";
 const PKG: &str = "cc-utils";
-const BOX: &str = "libteec";
+const TEEC: &str = "libcc_teec";
 
-pub fn generate_psk() -> Result<Vec<u8>> {
-    let mut psk = vec![0u8; 32];
+pub fn generate_psk() -> Result<[u8; 32]> {
+    let mut psk: [u8; 32] = Default::default();
     let mut ctx = Md::new(Type::SM3)?;
 
     ctx.update(KYLINOS.as_bytes())?;
     ctx.update(PKG.as_bytes())?;
-    ctx.update(BOX.as_bytes())?;
+    ctx.update(TEEC.as_bytes())?;
     let _len = ctx.finish(&mut psk);
 
     Ok(psk)
