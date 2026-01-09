@@ -117,9 +117,13 @@ fn handle_packet(
     message.extend_from_slice(&data);
     stream.write_all(&message)?;
 
-    let mut resp = Vec::new();
-    stream.read_to_end(&mut resp)?;
+    let mut len_buf = [0u8; 4];
+    stream.read_exact(&mut len_buf)?;
+    send_data(ctx, &len_buf)?;
 
+    let len = u32::from_ne_bytes(len_buf) as usize;
+    let mut resp = vec![0u8; len];
+    stream.read_exact(&mut resp)?;
     send_data(ctx, &resp)?;
 
     Ok(())
